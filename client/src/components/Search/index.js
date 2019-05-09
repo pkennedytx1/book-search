@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import API from "../../utils/API";
 import axios from "axios";
 
 const Search = () => {
@@ -39,7 +40,6 @@ const Search = () => {
         return authors;
       };
     
-
     return(
         <div>
         <div style={{backgroundColor: "black", margin: "0 0 40px 0"}}>
@@ -70,10 +70,26 @@ const Search = () => {
                                         <p>{book.volumeInfo.description}</p>
                                     </div>
                                     <div>
-                                        <a style={{margin: "0 20px 0 0"}} target="_blank" href={book.volumeInfo.infoLink}>Book Info</a>
-                                        <a target="_blank" href={book.saleInfo.buyLink}>
+                                        <a target="_blank" href={book.volumeInfo.infoLink}>Book Info</a>
+                                        <a style={{margin: "0 0 0 20px"}} target="_blank" href={book.saleInfo.buyLink}>
                                             {book.saleInfo.isEbook ? 'Buy Book' : ''}
                                         </a>
+                                        <button onClick={ (event) =>{
+                                             event.preventDefault();
+                                             if (book.volumeInfo.title) {
+                                                 API.saveBook({
+                                                 title: book.volumeInfo.title,
+                                                 author: bookAuthors(book.volumeInfo.authors),
+                                                 description: book.volumeInfo.description,
+                                                 imgLink: `http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`,
+                                                 buyLink: book.saleInfo.buyLink,
+                                                 infoLink: book.volumeInfo.infoLink
+                                                 })
+                                                 .then()
+                                                 .catch(err => console.log(err));
+                                             }
+                                             }
+                                        } style={{margin: "0 0 0 20px"}} type="button" className="btn btn-dark">Save Book</button>
                                     </div>
                                 </div>
                             </div>
