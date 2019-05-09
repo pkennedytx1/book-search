@@ -29,15 +29,30 @@ class Saved extends React.Component {
     render() {
         return(
             <div>
-            <h1>Saved Books</h1>
+            <h1 style={{padding: "40px", color: "white", backgroundColor: "black"}}>Saved Books</h1>
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
                   <ListItem key={book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
                     <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                      <div className="container">
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <img alt={`${book.title} book`} src={book.imgLink} />
+                                </div>
+                                <div className="col-md-9">
+                                    <div style={{maxHeight: "200px", overflow: "auto", margin: "0 0 10px 0"}}>
+                                        <h3>{book.title}</h3>
+                                        <p>{book.author}</p>
+                                        <p>{book.description}</p>
+                                    </div>
+                                    <div>
+                                        <a rel="noreferrer noopener" target="_blank" href={book.infoLink}>Book Info</a>
+                                        <a rel="noreferrer noopener" style={{margin: "0 0 0 20px"}} target="_blank" href={book.buyLink}>{!book.buyLink ? '' : 'Buy Book'}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                   </ListItem>
                 ))}
               </List>
