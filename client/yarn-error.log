@@ -1,0 +1,61 @@
+Arguments: 
+  /usr/local/Cellar/node/11.13.0/bin/node /usr/local/bin/yarn add axios
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.15.2
+
+Node version: 
+  11.13.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/resolve-pathname/-/resolve-pathname-2.2.0.tgz: Request failed "502 Bad Gateway"
+      at ResponseError.ExtendableBuiltin (/usr/local/lib/node_modules/yarn/lib/cli.js:696:66)
+      at new ResponseError (/usr/local/lib/node_modules/yarn/lib/cli.js:802:124)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:66128:16)
+      at Request.emit (events.js:193:13)
+      at Request.module.exports.Request.onRequestResponse (/usr/local/lib/node_modules/yarn/lib/cli.js:130418:10)
+      at ClientRequest.emit (events.js:198:15)
+      at HTTPParser.parserOnIncomingClient [as onIncoming] (_http_client.js:560:21)
+      at HTTPParser.parserOnHeadersComplete (_http_common.js:113:17)
+      at TLSSocket.socketOnData (_http_client.js:447:20)
+      at TLSSocket.emit (events.js:193:13)
+
+npm manifest: 
+  {
+    "name": "mern",
+    "version": "0.1.0",
+    "description": "Mern Demo",
+    "private": true,
+    "proxy": "http://localhost:3001/",
+    "dependencies": {
+      "axios": "^0.18.0",
+      "react": "^16.6.3",
+      "react-dom": "^16.6.3",
+      "react-router-dom": "^5.0.0",
+      "react-scripts": "^2.1.1"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test --env=jsdom",
+      "eject": "react-scripts eject"
+    },
+    "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
