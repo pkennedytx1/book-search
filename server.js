@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-const app = express();
-const io = require('socket.io')();
+const app = require('express')();
+const http = require('http').createServer(app)
+const io = require('socket.io')(http);
 
 // Define middleware here
 // Configure body parsing for AJAX requests
@@ -17,15 +18,15 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //socket.io Connection
-io.on('connection', (client) => {
-  // here you can start emitting events to the client 
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
-  });
-});
+// io.on('connection', (client) => {
+//   // here you can start emitting events to the client 
+//   client.on('subscribeToTimer', (interval) => {
+//     console.log('client is subscribing to timer with interval ', interval);
+//     setInterval(() => {
+//       client.emit('timer', new Date());
+//     }, interval);
+//   });
+// });
 
 // Add routes, both API and view
 app.use(routes);
@@ -37,7 +38,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-io.listen(3000);
-app.listen(PORT, function() {
+//io.listen(3000);
+http.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });

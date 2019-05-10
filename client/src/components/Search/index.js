@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import Toast from '../Toast';
 import API from "../../utils/API";
 import axios from "axios";
+import openSocket from 'socket.io-client';
+import toaster from 'toasted-notes';
+import 'toasted-notes/src/styles.css'; // optional styles
+
+const socket = openSocket('http://localhost:3001');
 
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -76,6 +82,10 @@ const Search = () => {
                                         </a>
                                         <button onClick={ (event) =>{
                                                 event.preventDefault();
+                                                toaster.notify(`${book.volumeInfo.title} was added to your saved books.`, {
+                                                    position: 'bottom-right',
+                                                    duration: 2000
+                                                    })
                                                 if (book.volumeInfo.title) {
                                                     API.saveBook({
                                                     title: book.volumeInfo.title,
